@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'admin/header.html'%}
+{% if messages %}
+{% for message in messages %}
+<div>
+  <script type="text/javascript">
+    window.onload = function () {
+      swal({
+        // title: "Good job!",
+        text: '{{message}}',
+        icon: "success",
+      });
+    }
+  </script>
+</div>
+{% endfor %}
+{% endif %}
+<div class="album py-5 bg-light">
+  <div class="container">
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for key,order in object_list.items %}
+      <div class="col">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <p class="card-text">Total Orders : {{order|length}}</p>
+            <br>
+            <p class="card-text">Status : {{key}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a href="{% url 'listorders' status=key %}" type="button" class="btn btn-sm btn-outline-secondary">Check
+                  Orders</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

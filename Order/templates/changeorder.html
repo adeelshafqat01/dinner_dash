@@ -1,0 +1,18 @@
+{% extends 'base.html' %}    
+{% block content %}
+    {% include 'admin/header.html'%}
+    <div class="container">
+      <div class="form-signin">
+          <form method="post">
+            {% csrf_token %}
+            <img class="mb-4" src="" alt="" width="72" height="57">
+            <div class="form-floating">
+              {{form.status}}
+              <label for="floatingInput">Status</label>
+            </div>
+            <button class="w-100 btn btn-lg btn-primary" type="submit">Update</button>
+            <p class="mt-5 mb-3 text-muted">&copy; 2022–2023</p>
+          </form>
+        </div>    
+        </div>
+{% endblock %}

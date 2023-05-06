@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if request.user.is_superuser %}
+{% include 'admin/header.html'%}
+{% else %}
+{% include 'client/header.html'%}
+{% endif %}
+<section class="h-100" style="background-color: rgb(217, 224, 224);">
+  <div class="container h-100 py-5">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-10">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h3 class="fw-normal mb-0 text-black">Order Details</h3>
+        </div>
+
+        <div class="card rounded-3 mb-4">
+          {% for item in object_list %}
+          <div class="card-body p-4">
+            <div class="row d-flex justify-content-between align-items-center">
+              <div class="col-md-2 col-lg-2 col-xl-2">
+                <img src={{item.photo_url}} class="img-fluid rounded-3" alt="Cotton T-shirt">
+              </div>
+              <div class="col-md-3 col-lg-3 col-xl-3">
+                <p class="lead fw-normal mb-2">{{item.title}}</p>
+              </div>
+              <div class="col-md-3 col-lg-3 col-xl-3">
+                <a href="{% url 'viewitem' pk=item.id %}">Check Item</a>
+              </div>
+              <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                <h5 class="mb-0">SubTotal : ${{item.price}}</h5>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h3>Status : {{status}}</h3>
+            <h3>Status updated {{time|timesince}} ago</h3>
+            <h3>Total Price : ${{price}}</h3>
+          </div>
+        </div>
+        {% if request.user.is_superuser %}
+        <div class="card">
+          <div class="card-body">
+            <h3>Name : {{username}}</h3>
+            <h3>Email : {{email}}</h3>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

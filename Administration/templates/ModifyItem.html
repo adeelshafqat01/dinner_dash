@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'admin/header.html'%}
+<!--Body Starts from Here-->
+<main>
+  <div class="album py-5 bg-light">
+    <div class="container">
+      {% if messages %}
+      {% for message in messages %}
+      <div>
+        <script type="text/javascript">
+          window.onload = function () {
+            swal({
+              // title: "Good job!",
+              text: '{{message}}',
+              icon: "success",
+            });
+          }
+        </script>
+      </div>
+      {% endfor %}
+      {% endif %}
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for item in object_list %}
+        <div class="col">
+          <div class="card shadow-sm">
+            <img class="bd-placeholder-img card-img-top" width="100%" height="225" src={{item.photo_url}}></img>
+
+            <div class="card-body">
+              <p class="card-text">{{item.title}}</p>
+              <p class="card-text">Item created : {{item.created_at|timesince}} ago</p>
+              <p class="card-text">Item updated : {{item.updated_at|timesince}} ago</p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <a href="{% url 'modifysingleitem' pk=item.id %}" type="button"
+                    class="btn btn-sm btn-outline-secondary">Modify</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

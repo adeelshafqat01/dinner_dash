@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'client/header.html'%}
+<div class="container mt-5">
+  <main>
+    {% if form.errors %}
+    <h1>{{ form.non_field_errors }}</h1>
+    {% endif %}
+    <form method="POST">
+      {% csrf_token %}
+      <img class="mb-4" src="" alt="" width="72" height="57">
+      <h1 class="h3 mb-3 fw-normal">Please Register</h1>
+      <div class="">
+        <label for="floatingInput">Name</label>
+        {{form.username}}
+      </div>
+      <div class="">
+        <label for="floatingInput">Display Name</label>
+        {{form.last_name}}
+      </div>
+      <div class="">
+        <label for="floatingInput">Email address</label>
+        {{form.email}}
+      </div>
+      <div class="">
+        <label for="floatingPassword">Password</label>
+        {{form.password}}
+      </div>
+      <div class="">
+        <label for="floatingPassword">Confirm Password</label>
+        {{form.confirm_password}}
+      </div>
+      <!--
+          <div class="checkbox mb-3">
+            <label>
+              {{form.is_superuser}} Register as an Admin
+            </label>
+          </div>
+          -->
+      <button class="w-100 btn btn-lg btn-primary" onclick="SignUp()" type="submit">Register</button>
+      {% if form.errors %}
+      <div class="alert alert-danger mt-2" role="alert">
+        {{ form.non_field_errors }}
+      </div>
+      {% endif %}
+      <p class="mt-5 mb-3 text-muted">&copy; 2022–2023</p>
+    </form>
+  </main>
+</div>
+<script>
+  function SignUp() {
+
+  }
+</script>
+{% endblock %}

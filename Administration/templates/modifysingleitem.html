@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'admin/header.html'%}
+<div class="container">
+  <div class="form-signin">
+    <form method="POST">
+      {% csrf_token %}
+      <img class="mb-4" src="" alt="" width="72" height="57">
+      <h1 class="h3 mb-3 fw-normal">Item</h1>
+      <div class="form-floating">
+        {{form.title}}
+        <label for="floatingInput">Title</label>
+      </div>
+      <div class="form-floating">
+        {{form.description}}
+        <label for="floatingInput">Description</label>
+      </div>
+      <div class="form-floating">
+        {{form.price}}
+        <label for="floatingInput">Price</label>
+      </div>
+      <div class="form-floating">
+        {{form.status}}
+        <label for="floatingInput">Status</label>
+      </div>
+      <div class="form-floating">
+        {{form.photo_url}}
+        <label for="floatingInput">Image Url</label>
+      </div>
+      <div class="mt-3 mb-3">
+        <input list="browsers" name="browser" id="browser" value={{categories}}>
+        <datalist id="browsers">
+          {% for category in Categories %}
+          <option value={{category.Name}}>
+            {% endfor %}
+        </datalist>
+        <label for="browser">Choose the Category:</label>
+      </div>
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Modify Item</button>
+      {% if form.errors %}
+      <div class="alert alert-danger mt-2" role="alert">
+        {{ form.non_field_errors }}
+      </div>
+      {% endif %}
+      <p class="mt-5 mb-3 text-muted">&copy; 2022–2023</p>
+    </form>
+  </div>
+</div>
+{% endblock %}

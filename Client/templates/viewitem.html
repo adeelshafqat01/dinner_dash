@@ -1,0 +1,24 @@
+{% extends 'base.html' %}    
+{% block content %}
+{% if request.user.is_superuser %}
+  {% include 'admin/header.html'%}
+{% else %}
+{% include 'client/header.html'%}
+{% endif %}
+  <div class="container mt-5">
+      <div class="row">
+        <img src={{object_list.photo_url}} alt="">
+      </div>
+      <div class="row mt-5">
+          <div class="col">
+            <h4>Name : {{object_list.title}}</h4>
+          </div>
+          <div class="col">
+            <h4>{{object_list.description}}</h4>
+          </div>
+          <div class="col">
+            <h4>Price : ${{object_list.price}}</h4>
+          </div>
+      </div>
+  </div>
+{% endblock %}

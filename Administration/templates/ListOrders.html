@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'admin/header.html'%}
+<div class="album py-5 bg-light">
+  <div class="container">
+    <h1>List of {{object_list.0.status}} Orders</h1>
+    <br>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      {% for order in object_list %}
+      <div class="col">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <p class="card-text">Order No : {{order.id}}</p>
+            <br>
+            <p class="card-text">Status : {{order.status}}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a href="{% url 'vieworderdetails' pk=order.id %}" type="button"
+                  class="btn btn-sm btn-outline-secondary">Order Details</a>
+              </div>
+            </div>
+            <br>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <a href="{% url 'ChangeOrder' pk=order.id %}" type="button"
+                  class="btn btn-sm btn-outline-secondary">Change Status</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

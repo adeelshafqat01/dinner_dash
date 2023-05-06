@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'client/header.html'%}
+{% if messages %}
+{% for message in messages %}
+<div>
+  <script type="text/javascript">
+    window.onload = function () {
+      swal({
+        // title: "Good job!",
+        text: '{{message}}',
+        icon: "success",
+      });
+    }
+  </script>
+</div>
+{% endfor %}
+{% endif %}
+<div class="container mt-5">
+  {% if form.email %}
+  <main>
+    <form method="POST">
+      {% csrf_token %}
+      <img class="mb-4" src="" alt="" width="72" height="57">
+      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+      <div class="">
+        <label for="floatingInput">Email address</label>
+        {{form.email}}
+      </div>
+      <div class="">
+        <label for="floatingPassword">Password</label>
+        {{form.password}}
+      </div>
+      <br>
+      <a href="{% url 'password_reset' %}">forgot Password</a>
+      <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+      {% if form.errors %}
+      <div class="alert alert-danger mt-2" role="alert">
+        {{ form.non_field_errors }}
+      </div>
+      {% endif %}
+      <p class="mt-5 mb-3 text-muted">&copy; 2022–2023</p>
+    </form>
+  </main>
+</div>
+{% else %}
+Please Enter a Valid Email Id and Password
+{% endif %}
+{% endblock %}
